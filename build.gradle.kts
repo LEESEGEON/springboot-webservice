@@ -5,6 +5,9 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.5.20"
     kotlin("plugin.spring") version "1.5.20"
+    // No-Args
+    kotlin("plugin.noarg") version "1.5.20"
+    kotlin("plugin.allopen") version "1.5.20"
 }
 
 group = "com.segeon.study"
@@ -13,6 +16,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -20,6 +24,13 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.h2database:h2")
+
+    // toString, toHash, equal 생성
+    implementation("au.com.console:kassava:2.1.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -32,4 +43,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+
+allOpen {
+    annotation("javax.persistence.Entity")
+}
+
+noArg {
+    annotation("javax.persistence.Entity")
 }
