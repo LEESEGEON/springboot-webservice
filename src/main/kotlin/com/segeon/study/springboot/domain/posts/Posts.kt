@@ -15,6 +15,13 @@ data class Posts(
     var content: String,
 
     var author: String? = null
-)
+) {
+
+    fun update(title: String, content: String) {
+
+        this.title = title
+        this.content = content
+    }
+}
     
 
